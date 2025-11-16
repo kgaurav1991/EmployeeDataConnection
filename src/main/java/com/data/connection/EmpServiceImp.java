@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class EmpServiceImp implements EmpService {
     @Autowired
-    private EmpReposotory<E> empReposotory;
+    private EmpReposotory empReposotory;
    // List<Employee> employees = new ArrayList<>();
 
     @Override
@@ -44,8 +44,9 @@ public class EmpServiceImp implements EmpService {
         //employees.remove(id);
         return true;
     }
+
     @Override
-    public String updateEmployee(Long id,Employee employee) {
+    public String updateEmployee(Long id, Employee employee) {
         EmpEntity exestingEmp = empReposotory.findById(id).get();
         exestingEmp.setEmail(employee.getEmail());
         exestingEmp.setFirstName(employee.getFirstName());
@@ -53,6 +54,17 @@ public class EmpServiceImp implements EmpService {
         empReposotory.save(exestingEmp);
 
         return "Updated Successfully";
+    }
+
+    @Override
+    public Employee readEmployeeId(Long id) {
+        Employee emp = new Employee();
+        EmpEntity empEntity = empReposotory.findById(id).get();
+        emp.setId(empEntity.getId());
+        emp.setLastName(empEntity.getLastName());
+        emp.setFirstName(empEntity.getFirstName());
+        emp.setEmail(empEntity.getEmail());
+        return emp;
     }
 
 }

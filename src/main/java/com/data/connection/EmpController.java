@@ -18,6 +18,10 @@ public class EmpController {
     public List<Employee> getAllEmployees(){
         return empService.readEmployees();
     }
+    @GetMapping("employee/{id}")
+    public Employee getEmployeesId(@PathVariable Long id) {
+        return empService.readEmployeeId(id);
+    }
 
     @PostMapping("employee")
     public String createEmployee(@RequestBody Employee employee){
@@ -32,7 +36,7 @@ public class EmpController {
             return "Employee not deleted";
     }
     @PutMapping("employee/{id}")
-    public String updatedEmployee(@PathVariable Long id, @RequestBody Employee employee){
+    public String put(@PathVariable Long id, @RequestBody Employee employee){
             return empService.updateEmployee(id,employee);
     }
 }
